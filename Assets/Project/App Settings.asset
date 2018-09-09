@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c36e791a9447c89a5ed396ae5e4a96, type: 3}
+  m_Name: App Settings
+  m_EditorClassIdentifier: 
+  HighScoresSettings:
+    UIScoreRecordPrefab: {fileID: 114213344922654956, guid: d42ef9022a534614b9727421067dff21,
+      type: 2}

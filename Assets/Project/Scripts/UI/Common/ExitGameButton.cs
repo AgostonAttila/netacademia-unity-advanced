@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ExitGameButton : MonoBehaviour {
-    private Button _button;
+namespace WonderGame.UI.Common {
+    public class ExitGameButton : MonoBehaviour {
+        private Button _button;
 
-    private void Awake() {
-        _button = GetComponent<Button>();
-    }
+        private void Awake() {
+            _button = GetComponent<Button>();
+        }
 
-    private void Start() {
-        _button.onClick.AddListener(OnClick);
-    }
+        private void Start() {
+            _button.onClick.AddListener(OnClick);
+        }
 
-    private void OnDestroy() {
-        _button.onClick.RemoveListener(OnClick);
-    }
+        private void OnDestroy() {
+            _button.onClick.RemoveListener(OnClick);
+        }
 
-    // gombra kattintáskor kilépünk a játékból
-    private static void OnClick() {
-        Application.Quit();
+        // gombra kattintáskor kilépünk a játékból
+        private static void OnClick() {
+            Application.Quit();
+        }
     }
 }

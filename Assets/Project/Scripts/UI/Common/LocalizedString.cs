@@ -1,8 +1,10 @@
 ﻿using System;
 
-[Serializable]
+namespace WonderGame.UI.Common {
+    [Serializable]
 // inspectorban is megjelenő kulcs-érték pár
-public class LocalizedString {
-    public string Key;
-    public string Value;
+    public class LocalizedString {
+        public string Key;
+        public string Value;
+    }
 }

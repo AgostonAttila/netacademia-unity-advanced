@@ -1,4 +1,6 @@
-﻿public enum MainMenuState {
-    Splash,
-    Menu
+﻿namespace WonderGame.UI.MainMenu {
+    public enum MainMenuState {
+        Splash,
+        Menu
+    }
 }

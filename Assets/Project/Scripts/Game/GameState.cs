@@ -1,36 +1,38 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class GameState : MonoBehaviour {
-    public int WinThreshold = 8;        // ennyi pont kell a nyeréshez
-    public float TimeSeconds;
+namespace WonderGame.Game {
+    public class GameState : MonoBehaviour {
+        public int WinThreshold = 8;        // ennyi pont kell a nyeréshez
+        public float TimeSeconds;
     
-    private PlayerInventory _playerInventory;
-    private Pickup[] _pickups;
+        private PlayerInventory _playerInventory;
+        private Pickup[] _pickups;
     
-    private void Awake() {
-        _pickups = FindObjectsOfType<Pickup>();
-        _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-    }
-
-    private void Update() {
-        if (CannotWin) {
-            Debug.Log("A játékos már sajnos nem nyerhet :(");
+        private void Awake() {
+            _pickups = FindObjectsOfType<Pickup>();
+            _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         }
+
+        private void Update() {
+            if (CannotWin) {
+                Debug.Log("A játékos már sajnos nem nyerhet :(");
+            }
         
-        // ha a játékosnál már legalább annyi pont van, amennyi a nyerési küszöb, akkor nyert
-        if (WinThreshold <= _playerInventory.PickupCount) {
-            Debug.Log("A játékos nyert! :)");
+            // ha a játékosnál már legalább annyi pont van, amennyi a nyerési küszöb, akkor nyert
+            if (WinThreshold <= _playerInventory.PickupCount) {
+                Debug.Log("A játékos nyert! :)");
+            }
+
+            TimeSeconds = Time.timeSinceLevelLoad;
         }
 
-        TimeSeconds = Time.timeSinceLevelLoad;
+        // igaz, hogyha a játékos már nem nyerhet (mert nincs elég pont a pályán ahhoz, hogy meglegyen a WinThreshold darab
+        // pickup nála)
+        // az összes pickup közül megszámolja azokat, amelyek active és enabled -> még felvehető pickupok
+        // WinThreshold - PickupCount -> mennyi pickup kell még a játékosnak ahhoz, hogy nyerjen
+        public bool CannotWin => _pickups.Count(p => p.isActiveAndEnabled) < WinThreshold - _playerInventory.PickupCount;
+
+        public int Score => Mathf.Max(0, Mathf.RoundToInt(_playerInventory.PickupCount * 1000 - TimeSeconds * 10));
     }
-
-    // igaz, hogyha a játékos már nem nyerhet (mert nincs elég pont a pályán ahhoz, hogy meglegyen a WinThreshold darab
-    // pickup nála)
-    // az összes pickup közül megszámolja azokat, amelyek active és enabled -> még felvehető pickupok
-    // WinThreshold - PickupCount -> mennyi pickup kell még a játékosnak ahhoz, hogy nyerjen
-    public bool CannotWin => _pickups.Count(p => p.isActiveAndEnabled) < WinThreshold - _playerInventory.PickupCount;
-
-    public int Score => Mathf.Max(0, Mathf.RoundToInt(_playerInventory.PickupCount * 1000 - TimeSeconds * 10));
 }

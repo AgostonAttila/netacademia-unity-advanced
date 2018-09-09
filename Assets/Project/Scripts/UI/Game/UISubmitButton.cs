@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using WonderGame.UI.Common;
 
-public class UISubmitButton : SceneNavigationButton {
-    [SerializeField] private EnterNameUIWindow _window;
+namespace WonderGame.UI.Game {
+    public class UISubmitButton : SceneNavigationButton {
+        [SerializeField] private EnterNameUIWindow _window;
     
-    // mielőtt scene-t váltunk, elmentjük a pontszámot
-    protected override void OnClick() {
-        _window.OnSubmitClick();
-        base.OnClick();
+        // mielőtt scene-t váltunk, elmentjük a pontszámot
+        protected override void OnClick() {
+            _window.OnSubmitClick();
+            base.OnClick();
+        }
     }
 }
