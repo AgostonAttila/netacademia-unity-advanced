@@ -14,13 +14,14 @@ namespace WonderGame.HighScores {
         [Inject] private readonly HighScoresController _highScoresController;
 
         // megjelenítjuk az ablakot, betöltjük és megjelenítjük a pontszámokat
-        public void Initialize() {
+        public async void Initialize() {
             _window.Show();
-            ShowScores(_highScoresController.Scores);
+            var highScores = await _highScoresController.LoadScores();        // high score lekérdezése a mock apiról
+            ShowScores(highScores);
         }
 
         // pontszámok megjelenítése (1 prefab példány 1 pontszámot jelenít meg)
-        private void ShowScores(IEnumerable<ScoreRecord> scores) {
+        public void ShowScores(List<ScoreRecord> scores) {
             foreach (var scoreRecord in scores) {
                 _scoreRecordFactory.Create(_content, scoreRecord);
             }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Purchasing;
 using WonderGame.UI.Common;
 
 namespace WonderGame.UI.MainMenu {
@@ -23,6 +24,12 @@ namespace WonderGame.UI.MainMenu {
         public void ExitGame() {
             Debug.Log("Exited game!");
             Application.Quit();    // kilépés a játékból
+        }
+
+        // callback hívás sikeres IAP vásárlás esetén
+        public void OnBuy2TimesScore(Product product) {
+            Debug.Log("Succesfully bought 2x score.");
+            PlayerPrefs.SetInt("scoreMultiplier", 2);    // beállítjuk a kétszeres szorzót a játékosnak
         }
     }
 }
